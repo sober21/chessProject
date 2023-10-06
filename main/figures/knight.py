@@ -1,11 +1,12 @@
-def knight_move(position: list) -> list:
+def knight_move(position: str|list) -> list:
     '''на вход позиция коня в шахматной аннотации, на выход: шахматная доска с конём в виде буквы "N",
     и возможные ходы коня в виде звёздочки("*")'''
     chess_board = [['.'] * 8 for _ in range(8)]
     letter = 'abcdefgh'
+    vertical,horizontal = position
     for i in range(8):
         for j in range(len(letter)):
-            if str(i + 1) == position[1] and 'abcdefgh'[j] == position[0]:
+            if str(i + 1) == horizontal and 'abcdefgh'[j] == vertical:
                 chess_board[i][j] = 'N'  # добавил местонахождение коня на доску
                 row, cols = i, j
     if row + 2 <= 7 and cols + 1 <= 7:  # проверки, чтобы возможный ход был в пределах доски
@@ -42,5 +43,5 @@ def knight_move(position: list) -> list:
 
 
 if __name__ == '__main__':
-    position = list(input())
+    position = input("Сделайте ход:")
     knight_move(position)
