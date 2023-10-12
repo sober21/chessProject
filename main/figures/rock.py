@@ -13,7 +13,8 @@ def possible_move(a_position='a1') -> list:
     return possible_move_rock_list
 
 
-
+def implementation_of_the_move():
+    pass
 
 # def valid_move(move='00') -> bool:
 #     '''проверяет правильность введённого хода'''
