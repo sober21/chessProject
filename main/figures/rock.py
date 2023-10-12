@@ -1,7 +1,9 @@
-def possible_move(start_position='a1') -> list:
+def possible_move(a_position='a1') -> list:
+    '''возвращает список возможных ходов для конкретной позиции'''
+
     row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     possible_move_rock_list = []
-    a, b = start_position
+    a, b = a_position
     for i in range(8):
         for j in range(8):
             if (j == row.index(a) and (8 - int(b) > i or 8 - int(b) < i)) or (
@@ -11,42 +13,38 @@ def possible_move(start_position='a1') -> list:
     return possible_move_rock_list
 
 
-def valid_move(move='00') -> str:
-    row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-    while move[0] not in row or move[1] not in ['1', '2', '3', '4', '5', '6', '7', '8']:
-        move = input('Сделайте ход:').lower().strip()
-        if move == 'стоп':
-            return 'Пока!'
-        elif move not in possible_move():
-            print('Невозможный ход для ладьи.')
-        elif len(move) == 0:
-            print('Надо написать ход в шахматной аннотации')
-            move = 'q0'
-        elif len(move) != 2:
-            print('Должно быть 2 символа без пробела: ряд и вертикаль.')
 
-        elif not move.isalnum():
-            print('Вводите только букву и цифру, как на шахматной доске.')
 
-        else:
-            print('Такой клетки нет на шахматной доске.')
-    return move
+# def valid_move(move='00') -> bool:
+#     '''проверяет правильность введённого хода'''
+#     before_move = 'a1'
+#     if move in possible_move(before_move):
+#         return True
+#     else:
+#         return False
 
 
 def rock_move() -> None:
+    '''печатает текущую позицию ладьи и возможные ходы'''
     row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-    a, b = valid_move()
-    for i in range(8):
-        for j in range(8):
-            if j == row.index(a) and i == 8 - int(b):
-                print('R', end=' ')
-            elif (j == row.index(a) and (8 - int(b) > i or 8 - int(b) < i)) or (
-                    8 - int(b) == i and (j > row.index(a) or j < row.index(a))):
-                print('*', end=' ')
-            else:
-                print('.', end=' ')
-        print()
-    print(end='\n \n \n')
+    list_move = ['a1']
+    while True:
+        cur_move = input('Сделайте ход:')
+        while cur_move not in possible_move(list_move[-1]):
+            cur_move = input('Сделайте ход:')
+        list_move.append(cur_move)
+        a, b = cur_move
+        for i in range(8):
+            for j in range(8):
+                if j == row.index(a) and i == 8 - int(b):
+                    print('R', end=' ')
+                elif (j == row.index(a) and (8 - int(b) > i or 8 - int(b) < i)) or (
+                        8 - int(b) == i and (j > row.index(a) or j < row.index(a))):
+                    print('*', end=' ')
+                else:
+                    print('.', end=' ')
+            print()
+        print(end='\n \n \n')
 
 
 if __name__ == '__main__':
