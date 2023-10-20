@@ -1,47 +1,42 @@
-def knight_move(position: str|list) -> list:
-    '''на вход позиция коня в шахматной аннотации, на выход: шахматная доска с конём в виде буквы "N",
-    и возможные ходы коня в виде звёздочки("*")'''
-    chess_board = [['.'] * 8 for _ in range(8)]
-    letter = 'abcdefgh'
-    vertical,horizontal = position
+
+def possible_move_knight(a_position='g1') -> list:
+    '''возвращает список возможных ходов для конкретной позиции'''
+
+    row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    possible_move_knight_list = []
+    a, b = a_position
     for i in range(8):
-        for j in range(len(letter)):
-            if str(i + 1) == horizontal and 'abcdefgh'[j] == vertical:
-                chess_board[i][j] = 'N'  # добавил местонахождение коня на доску
-                row, cols = i, j
-    if row + 2 <= 7 and cols + 1 <= 7:  # проверки, чтобы возможный ход был в пределах доски
-        chess_board[row + 2][cols + 1] = '*'
-        print(letter[cols + 1], row + 3, sep='')
-    if row + 2 <= 7 and cols - 1 >= 0:
-        chess_board[row + 2][cols - 1] = '*'
-        print(letter[cols - 1], row + 3, sep='')
-    if row + 1 <= 7 and cols + 2 <= 7:
-        chess_board[row + 1][cols + 2] = '*'
-        print(letter[cols + 2], row + 2, sep='')
-    if row + 1 <= 7 and cols - 2 >= 0:
-        chess_board[row + 1][cols - 2] = '*'
-        print(letter[cols - 2], row + 2, sep='')
-    if row - 1 >= 0 and cols - 2 >= 0:
-        chess_board[row - 1][cols - 2] = '*'
-        print(letter[cols - 2], row, sep='')
-    if row - 1 >= 0 and cols + 2 <= 7:
-        chess_board[row - 1][cols + 2] = '*'
-        print(letter[cols + 2], row, sep='')
-    if row - 2 >= 0 and cols - 1 >= 0:
-        chess_board[row - 2][cols - 1] = '*'
-        print(letter[cols - 1], row - 1, sep='')
-    if row - 2 >= 0 and cols + 1 <= 7:
-        chess_board[row - 2][cols + 1] = '*'
-        print(letter[cols + 1], row - 1, sep='')
-
-    for i in range(4):  # переворот доски. Первая строка меняется с последней, вторая с предпоследней и т.д.
         for j in range(8):
-            chess_board[i][j], chess_board[8 - 1 - i][j] = chess_board[8 - 1 - i][j], chess_board[i][j]
+            if (8 - int(b) - 2 == i and j == row.index(a) - 1) or (8 - int(b) - 2 == i and j == row.index(a) + 1) \
+                 or (8 - int(b) + 2 == i and j == row.index(a) - 1) or (8 - int(b) + 2 == i and j == row.index(a) + 1) \
+                 or (8 - int(b) - 1 == i and j == row.index(a) - 2) or (8 - int(b) - 1 == i and j == row.index(a) + 2) \
+                 or (8 - int(b) + 1 == i and j == row.index(a) - 2) or (8 - int(b) + 1 == i and j == row.index(a) + 2):
+                position = row[j] + str(8 - i)
+                possible_move_knight_list.append(position)
+    return possible_move_knight_list
 
-    for row in chess_board:
-        print(*row)
-
+def knight_move() -> None:
+    row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    list_move = ['g1']
+    while True:
+        cur_move = input('Сделайте ход:')
+        while cur_move not in possible_move_knight(list_move[-1]):
+            cur_move = input('Сделайте ход:')
+        list_move.append(cur_move)
+        a, b = cur_move
+        for i in range(8):
+            for j in range(8):
+                if j == row.index(a) and i == 8 - int(b):
+                    print('N', end=' ')
+                elif (8 - int(b) - 2 == i and j == row.index(a) - 1) or(8 - int(b) - 2 == i and j == row.index(a) + 1)\
+                  or (8 - int(b) + 2 == i and j == row.index(a) - 1) or (8 - int(b) + 2 == i and j == row.index(a) + 1)\
+                  or (8 - int(b) - 1 == i and j == row.index(a) - 2) or (8 - int(b) - 1 == i and j == row.index(a) + 2)\
+                  or (8 - int(b) + 1 == i and j == row.index(a) - 2) or (8 - int(b) + 1 == i and j == row.index(a) +2):
+                    print('*', end=' ')
+                else:
+                    print('.', end=' ')
+            print()
+        print(end='\n \n \n')
 
 if __name__ == '__main__':
-    position = input("Сделайте ход:")
-    knight_move(position)
+    knight_move()

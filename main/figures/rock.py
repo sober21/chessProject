@@ -1,4 +1,4 @@
-def possible_move(a_position='a1') -> list:
+def possible_move_rock(a_position='a1') -> list:
     '''возвращает список возможных ходов для конкретной позиции'''
 
     row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
@@ -31,7 +31,7 @@ def rock_move() -> None:
     list_move = ['a1']
     while True:
         cur_move = input('Сделайте ход:')
-        while cur_move not in possible_move(list_move[-1]):
+        while cur_move not in possible_move_rock(list_move[-1]):
             cur_move = input('Сделайте ход:')
         list_move.append(cur_move)
         a, b = cur_move

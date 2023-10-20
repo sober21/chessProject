@@ -1,4 +1,4 @@
-def possible_move(a_position='c1') -> list:
+def possible_move_bishop(a_position='c1') -> list:
     '''возвращает список возможных ходов для конкретной позиции'''
 
     row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
@@ -17,7 +17,7 @@ def bishop_move()->None:
     list_move = ['c1']
     while True:
         cur_move = input('Сделайте ход:')
-        while cur_move not in possible_move(list_move[-1]):
+        while cur_move not in possible_move_bishop(list_move[-1]):
             cur_move = input('Сделайте ход:')
         list_move.append(cur_move)
         a, b = cur_move
@@ -25,9 +25,8 @@ def bishop_move()->None:
             for j in range(8):
                 if j == row.index(a) and i == 8 - int(b):
                     print('B', end=' ')
-                elif (
-                        8 - int(b) - i == row.index(a) - j) or (
-                        8 - int(b) == i + (8 - int(b) - i) and row.index(a) == j - (8 - int(b) - i)):
+                elif (8 - int(b) - i == row.index(a) - j) or (8 - int(b) == i + (8 - int(b) - i)
+                    and row.index(a) == j - (8 - int(b) - i)):
                     print('*', end=' ')
                 else:
                     print('.', end=' ')
