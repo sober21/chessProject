@@ -1,21 +1,21 @@
 def possible_move_queen(a_position='d1') -> list:
     '''возвращает список возможных ходов для конкретной позиции'''
 
-    row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    start_row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     possible_move_queen_list = []
     a, b = a_position
     for i in range(8):
         for j in range(8):
-            if (j == row.index(a) and (8 - int(b) > i or 8 - int(b) < i)) or (
-                    8 - int(b) == i and (j > row.index(a) or j < row.index(a))) or (
-                    8 - int(b) - i == row.index(a) - j) or (
-                    8 - int(b) == i + (8 - int(b) - i) and row.index(a) == j - (8 - int(b) - i)):
-                position = row[j] + str(8 - i)
+            if (j == start_row.index(a) and (8 - int(b) > i or 8 - int(b) < i)) or (
+                    8 - int(b) == i and (j > start_row.index(a) or j < start_row.index(a))) or (
+                    8 - int(b) - i == start_row.index(a) - j) or (
+                    8 - int(b) == i + (8 - int(b) - i) and start_row.index(a) == j - (8 - int(b) - i)):
+                position = start_row[j] + str(8 - i)
                 possible_move_queen_list.append(position)
     return possible_move_queen_list
 
 def queen_move() -> None:
-    row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    start_row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     list_move = ['d1']
     while True:
         cur_move = input('Сделайте ход:')
@@ -25,12 +25,9 @@ def queen_move() -> None:
         a, b = cur_move
         for i in range(8):
             for j in range(8):
-                if j == row.index(a) and i == 8 - int(b):
+                if j == start_row.index(a) and i == 8 - int(b):
                     print('Q', end=' ')
-                elif (j == row.index(a) and (8 - int(b) > i or 8 - int(b) < i)) or (
-                        8 - int(b) == i and (j > row.index(a) or j < row.index(a))) or (
-                        8 - int(b) - i == row.index(a) - j) or (
-                        8 - int(b) == i + (8 - int(b) - i) and row.index(a) == j - (8 - int(b) - i)):
+                elif start_row[j] + str(8 - i) in possible_move_queen(cur_move):
                     print('*', end=' ')
                 else:
                     print('.', end=' ')

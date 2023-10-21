@@ -1,33 +1,23 @@
+
+
 def possible_move_rock(a_position='a1') -> list:
     '''возвращает список возможных ходов для конкретной позиции'''
 
-    row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    start_row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     possible_move_rock_list = []
     a, b = a_position
     for i in range(8):
         for j in range(8):
-            if (j == row.index(a) and (8 - int(b) > i or 8 - int(b) < i)) or (
-                    8 - int(b) == i and (j > row.index(a) or j < row.index(a))):
-                position = row[j] + str(8 - i)
+            if (j == start_row.index(a) and (8 - int(b) > i or 8 - int(b) < i)) or (
+                    8 - int(b) == i and (j > start_row.index(a) or j < start_row.index(a))):
+                position = start_row[j] + str(8 - i)
                 possible_move_rock_list.append(position)
     return possible_move_rock_list
 
 
-def implementation_of_the_move():
-    pass
-
-# def valid_move(move='00') -> bool:
-#     '''проверяет правильность введённого хода'''
-#     before_move = 'a1'
-#     if move in possible_move(before_move):
-#         return True
-#     else:
-#         return False
-
-
 def rock_move() -> None:
     '''печатает текущую позицию ладьи и возможные ходы'''
-    row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    start_row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     list_move = ['a1']
     while True:
         cur_move = input('Сделайте ход:')
@@ -37,10 +27,9 @@ def rock_move() -> None:
         a, b = cur_move
         for i in range(8):
             for j in range(8):
-                if j == row.index(a) and i == 8 - int(b):
+                if j == start_row.index(a) and i == 8 - int(b):
                     print('R', end=' ')
-                elif (j == row.index(a) and (8 - int(b) > i or 8 - int(b) < i)) or (
-                        8 - int(b) == i and (j > row.index(a) or j < row.index(a))):
+                elif start_row[j] + str(8-i) in possible_move_rock(cur_move):
                     print('*', end=' ')
                 else:
                     print('.', end=' ')
