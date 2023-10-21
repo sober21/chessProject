@@ -26,7 +26,7 @@ def queen_move() -> None:
         for i in range(8):
             for j in range(8):
                 if j == start_row.index(a) and i == 8 - int(b):
-                    print('Q', end=' ')
+                    print('♕', end=' ')
                 elif start_row[j] + str(8 - i) in possible_move_queen(cur_move):
                     print('*', end=' ')
                 else:

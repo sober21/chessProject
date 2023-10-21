@@ -28,7 +28,7 @@ def pawn_move() -> None:
         for i in range(8):
             for j in range(8):
                 if j == start_row.index(a) and i == 8 - int(b):
-                    print('p', end=' ')
+                    print('♙', end=' ')
                 elif start_row[j] + str(8 - i) in possible_move_pawn(cur_move):
                     print('*', end=' ')
                 else:
