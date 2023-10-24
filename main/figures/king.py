@@ -1,24 +1,18 @@
 def possible_move_king(a_position='e1') -> list:
     '''возвращает список возможных ходов для конкретной позиции'''
 
-    start_row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     possible_move_king_list = []
     a, b = a_position
-    for i in range(8):
-        for j in range(8):
-            if (j == start_row.index(a) and (8 - int(b) == i + 1 or 8 - int(b) == i - 1)) or (
-                    8 - int(b) == i and (j - 1 == start_row.index(a) or j + 1 == start_row.index(a))) or (
-                         8 - int(b) == i - 1 and start_row.index(a) == j - 1) or (
-                         8 - int(b) == i + 1 and start_row.index(a) == j + 1) or (
-                         8 - int(b) == i - 1 and start_row.index(a) == j + 1) or (
-                         8 - int(b) == i + 1 and start_row.index(a) == j - 1):
-                position = start_row[j] + str(8 - i)
+    for i in range(9):
+        for j in 'abcdefgh':
+            if (j == a or j == chr(ord(a) + 1) or j == chr(ord(a) - 1)) and (i == int(b) + 1 or i == int(b) - 1) \
+                    or (j == chr(ord(a) + 1) or j == chr(ord(a) - 1)) and i == int(b):
+                position = j + str(i)
                 possible_move_king_list.append(position)
     return possible_move_king_list
 
 
 def king_move() -> None:
-    start_row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     list_move = ['e1']
     while True:
         cur_move = input('Сделайте ход:')
@@ -26,11 +20,11 @@ def king_move() -> None:
             cur_move = input('Сделайте ход:')
         list_move.append(cur_move)
         a, b = cur_move
-        for i in range(8):
-            for j in range(8):
-                if j == start_row.index(a) and i == 8 - int(b):
+        for i in range(8, 0, -1):
+            for j in 'abcdefgh':
+                if j == a and i == int(b):
                     print('♔', end=' ')
-                elif start_row[j] + str(8-i) in possible_move_king(cur_move):
+                elif j + str(i) in possible_move_king(cur_move):
                     print('*', end=' ')
                 else:
                     print('.', end=' ')
@@ -39,5 +33,4 @@ def king_move() -> None:
 
 
 if __name__ == '__main__':
-
-    king_move()
+    print(king_move())

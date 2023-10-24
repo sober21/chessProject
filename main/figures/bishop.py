@@ -1,19 +1,17 @@
 def possible_move_bishop(a_position='c1') -> list:
     '''возвращает список возможных ходов для конкретной позиции'''
 
-    start_row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     possible_move_bishop_list = []
     a, b = a_position
-    for i in range(8):
-        for j in range(8):
-            if (8 - int(b) - i == start_row.index(a) - j) or (8 - int(b) == i + (8 - int(b) - i)
-                and start_row.index(a) == j - (8 - int(b) - i)):
-                position = start_row[j] + str(8 - i)
+    for i in range(9):
+        for j in 'abcdefgh':
+            if abs(int(b) - i) == abs(ord(a) - ord(j)):
+                position = j + str(i)
                 possible_move_bishop_list.append(position)
     return possible_move_bishop_list
 
-def bishop_move()->None:
-    start_row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+
+def bishop_move() -> None:
     list_move = ['c1']
     while True:
         cur_move = input('Сделайте ход:')
@@ -21,11 +19,11 @@ def bishop_move()->None:
             cur_move = input('Сделайте ход:')
         list_move.append(cur_move)
         a, b = cur_move
-        for i in range(8):
-            for j in range(8):
-                if j == start_row.index(a) and i == 8 - int(b):
+        for i in range(8, 0, -1):
+            for j in 'abcdefgh':
+                if j == a and i == int(b):
                     print('♗', end=' ')
-                elif start_row[j] + str(8 - i) in possible_move_bishop(cur_move):
+                elif j + str(i) in possible_move_bishop(cur_move):
                     print('*', end=' ')
 
                 else:
