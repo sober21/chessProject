@@ -4,53 +4,49 @@ class Knight:
         self.vertical = vertical
         self.color = color
         self.possible_move_knight_list = []
+
     def get_char(self):
         return 'N'
 
-    def can_move(self, horizontal, vertical):
-        start_row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-
+    def can_move(self, x, y):
+        self.h, self.v = x,y
         a, b = self.horizontal, self.vertical
-        for i in range(8):
-            for j in range(8):
-                if (8 - int(b) - 2 == i and j == start_row.index(a) - 1) or (
-                        8 - int(b) - 2 == i and j == start_row.index(a) + 1) \
-                        or (8 - int(b) + 2 == i and j == start_row.index(a) - 1) or (
-                        8 - int(b) + 2 == i and j == start_row.index(a) + 1) \
-                        or (8 - int(b) - 1 == i and j == start_row.index(a) - 2) or (
-                        8 - int(b) - 1 == i and j == start_row.index(a) + 2) \
-                        or (8 - int(b) + 1 == i and j == start_row.index(a) - 2) or (
-                        8 - int(b) + 1 == i and j == start_row.index(a) + 2):
-                    position = start_row[j] + str(8 - i)
-                    self.possible_move_knight_list.append(position)
-        self.h = horizontal
-        self.v = vertical
-        if self.h + str(self.v) in self.possible_move_knight_list:
-            return True
-        else:
-            return False
+        for i in range(9):
+            for j in 'abcdefgh':
+                if (j == chr(ord(a) + 1) or j == chr(ord(a) - 1)) and (i == int(b) + 2 or i == int(b) - 2) or \
+                        (j == chr(ord(a) + 2) or j == chr(ord(a) - 2)) and (i == int(b) + 1 or i == int(b) - 1):
+                    if self.h + str(self.v) == j + str(i):
+                        return True
+        return False
 
-    def move_to(self, horizontal, vertical):
-        if self.can_move(horizontal=horizontal, vertical=vertical):
-            self.horizontal = horizontal
-            self.vertical = vertical
+    def move_to(self, x, y):
+        if self.can_move(x=x, y=y):
+            self.horizontal = x
+            self.vertical = y
 
     def draw_board(self):
-        start_row = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
         a, b = self.horizontal, self.vertical
-        for i in range(8):
-            for j in range(8):
-                if j == start_row.index(a) and i == 8 - int(b):
+        for i in range(8, 0, -1):
+            for j in 'abcdefgh':
+                if j == a and i == int(b):
                     print('N', end=' ')
-                elif start_row[j] + str(8 - i) in self.possible_move_knight_list:
+
+                elif (j == chr(ord(a) + 1) or j == chr(ord(a) - 1)) and (
+                        i == int(b) + 2 or i == int(b) - 2) or \
+                        (j == chr(ord(a) + 2) or j == chr(ord(a) - 2)) and (
+                        i == int(b) + 1 or i == int(b) - 1):
+
                     print('*', end=' ')
                 else:
                     print('.', end=' ')
             print()
-        print(self.possible_move_knight_list)
 
 
 if __name__ == '__main__':
     knight = Knight('c', 3, 'white')
 
+    print(knight.color, knight.get_char())
+    print(knight.horizontal, knight.vertical)
+    knight.draw_board()
+    knight.move_to('e', 4)
     knight.draw_board()
