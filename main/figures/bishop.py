@@ -5,7 +5,7 @@ def possible_move_bishop(a_position='c1') -> list:
     a, b = a_position
     for i in range(1,9):
         for j in 'abcdefgh':
-            if abs(int(b) - i) == abs(ord(a) - ord(j)):
+            if abs(int(b) - i) == abs(ord(a) - ord(j)) and (j+str(i) != a_position):
                 position = j + str(i)
                 possible_move_bishop_list.append(position)
     return possible_move_bishop_list

@@ -5,7 +5,7 @@ def possible_move_rock(a_position='a1') -> list:
     a, b = a_position
     for i in range(1, 9):
         for j in 'abcdefgh':
-            if j == a or i == int(b):
+            if (j == a or i == int(b)) and (j+str(i) != a_position):
                 position = j + str(i)
                 possible_move_rock_list.append(position)
     return possible_move_rock_list

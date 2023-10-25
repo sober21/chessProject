@@ -2,7 +2,7 @@ import rock, bishop, king
 
 
 def choise_figure() -> str:
-    figure = input('Выберите фигуру')
+    figure = input('Выберите фигуру:')
     return figure
 
 
