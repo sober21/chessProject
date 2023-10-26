@@ -11,52 +11,45 @@ def move() -> str:
     return move1
 
 
-def print_board():
-    r = rock.cur_move1()
-    b = bishop.cur_move1()
-    k = king.cur_move1()
+def print_board(r1='a1', r2='h1', n1='b1', n2='g1', b1='c1', b2='f1', q='d1', k='e1'):
+
     for i in range(8, 0, -1):
         for j in 'abcdefgh':
-            if j == r[0] and i == int(r[1]):
-                print('♖', end=' ')
-            elif j == b[0] and i == int(b[1]):
-                print('♗', end=' ')
+            if j == r1[0] and i == int(r1[1]):
+                print('♖', end='  ')
+            elif j == r2[0] and i == int(r2[1]):
+                print('♖', end='  ')
+            elif j == n2[0] and i == int(n2[1]):
+                print('♘', end='  ')
+            elif j == n1[0] and i == int(n1[1]):
+                print('♘', end='  ')
+            elif j == b2[0] and i == int(b2[1]):
+                print('♗', end='  ')
+            elif j == b1[0] and i == int(b1[1]):
+                print('♗ ', end='  ')
+            elif j == q[0] and i == int(q[1]):
+                print('♕', end='  ')
             elif j == k[0] and i == int(k[1]):
-                print('♔', end=' ')
+                print('♔ ', end='  ')
             # elif j + str(i) in list_move:
             #     print('*', end=' ')
             else:
-                print('.', end=' ')
+                print('. ', end='  ')
         print()
     print(end='\n \n \n')
 
-    pass
+
 
 
 def add_figures_on_chess_board():
-    # position_figures = [rock.cur_move1(), bishop.cur_move1()]
-    figure = ['q', 'r', 'p', 'k', 'n', 'b']
-    fig = choise_figure()
-    mo = move()
-    r = rock.cur_move1()
-    b = bishop.cur_move1()
-    for i in figure:
-        if fig == i:
-            x1 = i.cur_move(mo)
+    print_board()
+    f = choise_figure()
+    m = move()
 
-    for i in range(8, 0, -1):
-        for j in 'abcdefgh':
-            if j == r[0] and i == int(r[1]):
-                print('♖', end=' ')
-            elif j == b[0] and i == int(b[1]):
-                print('♗', end=' ')
-            # elif j + str(i) in list_move:
-            #     print('*', end=' ')
-            else:
-                print('.', end=' ')
-        print()
-    print(end='\n \n \n')
+    print_board()
+
+
 
 
 if __name__ == '__main__':
-    print_board()
+    print_board(r2='h3')
