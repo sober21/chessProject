@@ -1,12 +1,15 @@
-def possible_move_rock(a_position='a1') -> bool:
+def possible_move_rock(cur_position, last_position, all_positions) -> bool:
     '''возвращает список возможных ходов для конкретной позиции'''
 
     possible_move_rock_list = []
-    a, b = a_position
+    a, b = last_position
     for i in range(1, 9):
         for j in 'abcdefgh':
-            if (j == a or i == int(b)) and (j+str(i) != a_position):
-                return True
+            if (j == a or i == int(b)) and (j+str(i) != last_position):
+                position = j + str(i)
+                if position == cur_position and position not in all_positions.values():
+                    return True
+
     return False
 
 

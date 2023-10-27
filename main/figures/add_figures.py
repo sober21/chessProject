@@ -10,13 +10,12 @@ def move() -> str:
     move1 = input('Сделайте ход:')
     return move1
 
-def possible_move(figure: str, position:str) -> bool:
+
+def possible_move(figure: str, position: str, last_position: str, all_positions: dict) -> bool:
     if figure == 'R1':
-        if rock.possible_move_rock(position):
+        if rock.possible_move_rock(position, last_position, all_positions):
             return True
     return False
-
-
 
 
 def print_board(**kwargs):
@@ -47,8 +46,6 @@ def print_board(**kwargs):
     print(end='\n \n \n')
 
 
-
-
 def add_figures_on_chess_board():
     d = {
         'R1': 'a1',
@@ -65,11 +62,10 @@ def add_figures_on_chess_board():
     while f != 'Стоп':
         f = choise_figure()
         m = move()
-        if possible_move(f, m):
-            d[f]=m
+        if possible_move(f, m, d[f], d):
+            d[f] = m
             print_board(**d)
-
-
+        print('Невозможный ход')
 
 
 if __name__ == '__main__':

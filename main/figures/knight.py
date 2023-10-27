@@ -1,16 +1,18 @@
-def possible_move_knight(a_position='g1') -> list:
+def possible_move_knight(cur_position, last_position) -> list:
     '''возвращает список возможных ходов для конкретной позиции'''
 
     possible_move_knight_list = []
-    a, b = a_position
+    a, b = cur_position
     for i in range(9):
         for j in 'abcdefgh':
             if (j == chr(ord(a) + 1) or j == chr(ord(a) - 1)) and (i == int(b) + 2 or i == int(b) - 2) or \
                     (j == chr(ord(a) + 2) or j == chr(ord(a) - 2)) and (i == int(b) + 1 or i == int(b) - 1):
                 position = j + str(i)
+                if position == last_position:
+                    return True
                 possible_move_knight_list.append(position)
 
-    return possible_move_knight_list
+    return False
 
 
 def knight_move() -> None:
