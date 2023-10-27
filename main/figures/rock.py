@@ -1,4 +1,4 @@
-def possible_move_rock(a_position='a1') -> list:
+def possible_move_rock(a_position='a1') -> bool:
     '''возвращает список возможных ходов для конкретной позиции'''
 
     possible_move_rock_list = []
@@ -6,9 +6,9 @@ def possible_move_rock(a_position='a1') -> list:
     for i in range(1, 9):
         for j in 'abcdefgh':
             if (j == a or i == int(b)) and (j+str(i) != a_position):
-                position = j + str(i)
-                possible_move_rock_list.append(position)
-    return possible_move_rock_list
+                return True
+    return False
+
 
 
 def cur_move1(x='a1'):
