@@ -3,15 +3,39 @@ def possible_move_rock(cur_position, last_position, all_positions) -> bool:
 
     possible_move_rock_list = []
     a, b = last_position
-    for i in range(1, 9):
-        for j in 'abcdefgh':
-            if (j == a or i == int(b)) and (j+str(i) != last_position):
-                position = j + str(i)
-                if position == cur_position and position not in all_positions.values():
-                    return True
+    if last_position[0] < cur_position[0] or last_position[1] < cur_position[1]:
+        for i in range(1, 9):
+            for j in 'abcdefgh':
+                if (j == a or i == int(b)) and (j + str(i) != last_position):
+                    position = j + str(i)
+                    if position == cur_position and position not in all_positions.values():
+                        return True
+                    elif (position in all_positions.values() and position[0] == cur_position[0]) or \
+                            (position in all_positions.values() and position[1] == cur_position[1]):
+                        return False
+
+    elif last_position[1] > cur_position[1]:
+        for i in range(8, 0, -1):
+            for j in 'abcdefgh':
+                if (j == a or i == int(b)) and (j + str(i) != last_position):
+                    position = j + str(i)
+                    if (position in all_positions.values() and position[0] == cur_position[0]) or \
+                            (position in all_positions.values() and position[1] == cur_position[1]):
+                        return False
+                    elif position == cur_position and position not in all_positions.values():
+                        return True
+    elif last_position[0] > cur_position[0]:
+        for i in range(1, 9):
+            for j in 'abcdefgh':
+                if (j == a or i == int(b)) and (j + str(i) != last_position):
+                    position = j + str(i)
+                    if (position in all_positions.values() and position[0] == cur_position[0]) or \
+                            (position in all_positions.values() and position[1] == cur_position[1]):
+                        return False
+                    elif position == cur_position and position not in all_positions.values():
+                        return True
 
     return False
-
 
 
 def cur_move1(x='a1'):

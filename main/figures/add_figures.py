@@ -50,12 +50,12 @@ def add_figures_on_chess_board():
     d = {
         'R1': 'a1',
         'R2': 'h1',
-        'N1': 'b1',
+        'N1': 'a3',
         'N2': 'g1',
-        'B1': 'c1',
+        'B1': 'c6',
         'B2': 'f1',
         'Q': 'd1',
-        'K': 'e1'
+        'K': 'e4'
     }
     print_board(**d)
     f = ''
