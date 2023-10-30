@@ -1,3 +1,12 @@
+from figure import Figure
+
+class Rock(Figure):
+    def __init__(self, name, color):
+        super().__init__(name=name, color=color)
+
+    def move(self, cur_position, last_position, all_positions):
+        super().move(cur_position, last_position, all_positions)
+
 def possible_move_rock(cur_position, last_position, all_positions) -> bool:
     '''возвращает список возможных ходов для конкретной позиции'''
 
@@ -64,4 +73,5 @@ def rock_move() -> None:
 
 
 if __name__ == '__main__':
-    rock_move()
+    rock = Rock('r1', 'white')
+    print(rock._name)
